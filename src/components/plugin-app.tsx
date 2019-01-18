@@ -8,6 +8,7 @@ interface IProps {
   authoredState: IAuthoredState;
   wrappedEmbeddableDiv?: HTMLDivElement;
   wrappedEmbeddableContext?: object;
+  context?: object;
 }
 
 interface IState {}
@@ -15,10 +16,9 @@ interface IState {}
 export default class PluginApp extends React.Component<IProps, IState> {
 
   public render() {
-    const {authoredState} = this.props;
     return(
       <div className="plugin-wrapper">
-        <PluginComponent authoredState={authoredState} />
+        <PluginComponent {... this.props} />
       </div>
     );
   }

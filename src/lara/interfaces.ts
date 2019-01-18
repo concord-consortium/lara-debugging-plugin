@@ -3,7 +3,14 @@ export interface IExternalScriptContext {
   authoredState: string;
   learnerState: string;
   pluginId: string;
-  wrappedEmbeddableDiv?: any;
+  url: string;
+  pluginStateKey: string;
+  runID: number;
+  userEmail: string;
+  classInfoUrl: string;
+  remoteEndpoint: string;
+  getFirebaseJwtUrl: (appName: string) => string;
+  wrappedEmbeddableDiv?: HTMLDivElement;
   wrappedEmbeddableContext?: any;
 }
 

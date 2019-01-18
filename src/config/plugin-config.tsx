@@ -5,8 +5,8 @@ export interface IPluginConfig {
 }
 
 const PluginConfig: IPluginConfig = {
-  PluginName: "Demo Plugin",
-  PluginID: "LaraStarterPlugin"
+  PluginName: "Debug Plugin",
+  PluginID: "LaraDebugPlugin"
 };
 
 export default PluginConfig;

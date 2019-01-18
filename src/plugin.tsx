@@ -38,6 +38,7 @@ export class TeacherEditionTipsPlugin {
         authoredState={authoredState}
         wrappedEmbeddableDiv={this.context.wrappedEmbeddableDiv}
         wrappedEmbeddableContext={this.context.wrappedEmbeddableContext}
+        context={this.context}
         PluginAPI={PluginAPI}
       />,
       this.context.div);

@@ -1,23 +1,18 @@
-# LARA Starter Plugin
+# LARA Debugging Plugin
 
-An empty plugin to use as a starting point when developing LARA plugins.
-Although a LARA Plugin API Interface has been provided in `./src/lara/interfaces.ts`
+Add this plugin to a LARA instance to see what the plugin runtime context is being
+set as. Future plans are to excersize all lara API functions.
+
+This project was cloned from the [Lara Starter Plugin repo](https://github.com/concord-consortium/lara-starter-plugin).
+
+A LARA Plugin API Interface has been provided in `./src/lara/interfaces.ts`
 it would be smart to check the
 [current LARA API](https://github.com/concord-consortium/lara/blob/master/app/assets/javascripts/lara-api.js) in the
 [LARA repo](https://github.com/concord-consortium/lara)
 
 To install this plugin in LARA using a local server, login as an admin, and follow
 the top navigation link to 'Plugins' and then create a new one. Set the plugin's
-label to `LaraStarterPlugin` as defined in `plugin-condfig.tsx`.
-
----
-![adding the plugin](add-plugin.png)
-
----
-To test it out create a new activity page, and add a new embeddable plugin. Specify
-the new Plugin, and add authoring data JSON like `{ "helloText" : "Hello World" }`
-
-![configuring the plugin](configure-plugin.png)
+label to `LaraDebugPlugin` as defined in `plugin-config.tsx`.
 
 
 ## Development
