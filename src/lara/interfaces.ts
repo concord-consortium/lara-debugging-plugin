@@ -9,6 +9,7 @@ export interface IExternalScriptContext {
   userEmail: string;
   classInfoUrl: string;
   remoteEndpoint: string;
+  interactiveStateUrl: string; 
   getFirebaseJwtUrl: (appName: string) => string;
   wrappedEmbeddableDiv?: HTMLDivElement;
   wrappedEmbeddableContext?: any;
