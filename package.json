@@ -1,7 +1,7 @@
 {
-  "name": "lara-starter-plugin",
+  "name": "lara-debug-plugin",
   "version": "0.0.1",
-  "description": "Lara Starter Plugin",
+  "description": "Lara Debugger Plugin",
   "main": "index.js",
   "jest": {
     "transform": {
