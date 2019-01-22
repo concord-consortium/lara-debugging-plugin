@@ -6,11 +6,11 @@ import * as css from "./plugin-component.sass";
 import DataInspector from "./data-inspector";
 
 interface IProps {
-  PluginAPI: any;
+  PluginAPI?: any;
   authoredState: IAuthoredState;
   wrappedEmbeddableDiv?: HTMLDivElement;
   wrappedEmbeddableContext?: any;
-  context: IExternalScriptContext;
+  context?: IExternalScriptContext;
 }
 interface IState {
   token: string;
@@ -29,12 +29,14 @@ export default class PluginComponent extends React.Component<IProps, IState> {
   public componentDidMount() {
     const {context, authoredState} = this.props;
     const {firebaseAppName } = authoredState;
-    getFirebaseJWT(context, firebaseAppName).then((response) => {
-      this.setState({token: response.token, claims: response.claims});
-    });
-    getClassInfo(context).then( (classInfo) => {
-      this.setState({classInfo});
-    });
+    if (context && firebaseAppName) {
+      getFirebaseJWT(context, firebaseAppName).then((response) => {
+        this.setState({token: response.token, claims: response.claims});
+      });
+      getClassInfo(context).then( (classInfo) => {
+        this.setState({classInfo});
+      });
+    }
     this.getRefToWRap();
   }
 
@@ -45,7 +47,7 @@ export default class PluginComponent extends React.Component<IProps, IState> {
       <div>
         <div ref={this.wrappedEmbeddableDivContainer} />
         <div className={css.plugin}>
-          <DataInspector data={context} hideKeys={['div']} label="Context"/>
+          <DataInspector data={context} hideKeys={["div"]} label="Context"/>
           <DataInspector data={classInfo} label="Class Info"/>
           <DataInspector data={claims} label="JWT Claims"/>
           <DataInspector data={authoredState} label="Authored State"/>

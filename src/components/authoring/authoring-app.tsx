@@ -8,7 +8,7 @@ import { IAuthoredState } from "../../types";
 import PluginComponent from "../plugin-component";
 
 const defaultProps: IAuthoredState = {
-  helloText: "Hello There!"
+  firebaseAppName: "fake-db-name"
 };
 
 const portalDom = document.createElement("div");
@@ -29,11 +29,13 @@ export default class AuthoringApp extends React.Component<IProps, IState> {
 
   public render() {
     const { authoredState } = this.state;
-    const { helloText } = authoredState;
+    const { firebaseAppName } = authoredState;
     return (
       <div className={css.container}>
         <div className={css.preview}>
-          <PluginComponent authoredState={authoredState} />
+          <PluginComponent
+            authoredState={authoredState}
+          />
         </div>
         <div className={css.json}>
           <JsonEditor authoredState={authoredState} onSave={this.updateState} />
