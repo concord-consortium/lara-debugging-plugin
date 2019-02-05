@@ -15,7 +15,7 @@ export default class DataInspector extends React.Component<IProps, IState> {
   public renderObjectKey(key: string): JSX.Element {
     const { data, hideKeys } =  this.props;
     if (typeof hideKeys !== "undefined") {
-      if ((hideKeys as string[]).find((v) => v === key)) { return null; }
+      if ((hideKeys as string[]).find((v) => v === key)) { return <span/>; }
     }
 
     let value: string|JSX.Element;
