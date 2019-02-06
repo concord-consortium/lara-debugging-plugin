@@ -119,7 +119,9 @@ export const LARA = {
    @returns Promise
   ****************************************************************************/
   saveLearnerPluginState: (pluginId: string, state: string) => {
+    // tslint:disable-next-line
     console.log(`pluginId: ${pluginId}:`);
+    // tslint:disable-next-line
     console.log(`pluginId: ${pluginId}:`);
     return Promise.resolve(state);
   },
@@ -138,6 +140,7 @@ export const LARA = {
   @returns void
   ****************************************************************************/
   decorateContent: (words: string, replace: string, wordClass: string, listeners?: any) => {
+    // tslint:disable-next-line
     console.log("Decorate Context called …");
   },
 
@@ -152,6 +155,7 @@ export const LARA = {
    **************************************************************/
     registerPlugin: (label: string, _class: any) => {
     // return Plugins.registerPlugin(label, _class);
+    // tslint:disable-next-line
     console.log("registerPlugin called …");
     return true;
   },
