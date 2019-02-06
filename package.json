@@ -52,14 +52,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/concord-consortium/lara-starter-plugin.git"
+    "url": "git+https://github.com/concord-consortium/lara-debug-plugin.git"
   },
   "author": "Concord Consortium",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/concord-consortium/lara-starter-plugin/issues"
+    "url": "https://github.com/concord-consortium/lara-debug-plugin/issues"
   },
-  "homepage": "https://github.com/concord-consortium/lara-starter-plugin#readme",
+  "homepage": "https://github.com/concord-consortium/lara-debug-plugin#readme",
   "peerDependencies": {
     "react": "^16.6.0",
     "react-dom": "^16.6.0"
