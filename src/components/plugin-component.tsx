@@ -14,7 +14,7 @@ import {
 import * as css from "./plugin-component.sass";
 import DataInspector from "./data-inspector";
 
-interface IProps {
+export interface IProps {
   PluginAPI?: any;
   authoredState: IAuthoredState;
   wrappedEmbeddableDiv?: HTMLDivElement;
