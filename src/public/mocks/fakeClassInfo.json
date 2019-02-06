@@ -1,4 +1,39 @@
 {
-  "test": true,
-  "number": 100
+  "id": 136,
+  "uri": "https://learn.staging.concord.org/api/v1/classes/136",
+  "name": "Session Saving (group A)",
+  "state": "MA",
+  "class_hash": "a3eae31594787a3e3ca73943821b0363a4e4603a672d08d3",
+  "class_word": "sessiona",
+  "edit_path": "/portal/classes/136/edit",
+  "assign_materials_path": "/",
+  "teachers": [{
+    "id": "https://learn.staging.concord.org/users/22",
+    "first_name": "Teacher",
+    "last_name": "Lastname"
+  }],
+  "students": [{
+    "id": "https://learn.staging.concord.org/users/23",
+    "email": "no-email-81932a5a-ae79-11e2-9416-22000a1e9b59@concord.org",
+    "first_name": "Student A",
+    "last_name": "Lastname"
+  }, {
+    "id": "https://learn.staging.concord.org/users/24",
+    "email": "no-email-81932a5a-ae79-11e2-9416-22000a1e9b59@concord.org",
+    "first_name": "Student B",
+    "last_name": "OtherName"
+  }],
+  "offerings": [{
+      "id": 708,
+      "name": "HASBOT Will there be enough fresh water?",
+      "active": true,
+      "locked": false,
+      "url": "https://learn.staging.concord.org/api/v1/offerings/7"
+    },{
+      "id": 709,
+      "name": "HASBOT Will there be enough fresh air?",
+      "active": true,
+      "locked": false,
+      "url": "https://learn.staging.concord.org/api/v1/offerings/8"
+  }]
 }
