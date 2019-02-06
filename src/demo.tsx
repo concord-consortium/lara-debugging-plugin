@@ -6,15 +6,12 @@ import { IExternalScriptContext } from "./lara/interfaces";
 import PluginComponent from "./components/plugin-component";
 import { IProps as IPluginProps } from "./components/plugin-component";
 import PluginConfig from "./config/plugin-config";
-
+import { LARA } from "./lara/mock-api";
 const authoredState: IAuthoredState = {
   helloText: "Hello World",
   firebaseAppName: "mock-data"
 };
 
-const fakeApi = {
-  foo: "foo"
-};
 const fakeEmbeddableContext = {
   type: "mutliple-choice",
   answers: [ "one", "two", "three" ]
@@ -39,7 +36,7 @@ const fakeContext: IExternalScriptContext = {
 
 const props: IPluginProps = {
   authoredState,
-  PluginAPI: fakeApi,
+  PluginAPI: LARA,
   context: fakeContext
 };
 
@@ -47,6 +44,7 @@ ReactDOM.render(
   <div>
     <PluginComponent
       authoredState={authoredState}
+      PluginAPI={ LARA }
       context={fakeContext}/>
   </div>,
   document.getElementById("plugin")

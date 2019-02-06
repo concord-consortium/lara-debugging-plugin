@@ -1,6 +1,6 @@
 import * as React from "react";
 import { IAuthoredState } from "../types";
-import { IExternalScriptContext } from "../lara/interfaces";
+import { IExternalScriptContext, ILara } from "../lara/interfaces";
 import {
   getFirebaseJWT,
   getClassInfo,
@@ -13,9 +13,10 @@ import {
 } from "../lara/helper-functions";
 import * as css from "./plugin-component.sass";
 import DataInspector from "./data-inspector";
+import ActionButtons from "./action-buttons";
 
 export interface IProps {
-  PluginAPI?: any;
+  PluginAPI?: ILara;
   authoredState: IAuthoredState;
   wrappedEmbeddableDiv?: HTMLDivElement;
   wrappedEmbeddableContext?: any;
@@ -46,11 +47,9 @@ export default class PluginComponent extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const {context, authoredState} = this.props;
+    const {context, authoredState, PluginAPI } = this.props;
     const {classInfo, claims, interactiveState} = this.state;
-    const headerStyle = {
-      fontFamily: "sans-serif"
-    };
+    const headerStyle = {fontFamily: "sans-serif" };
     return (
       <div>
         <span style={headerStyle}> LARA Context inspector </span>
@@ -62,6 +61,7 @@ export default class PluginComponent extends React.Component<IProps, IState> {
           <DataInspector data={claims} label="JWT Claims"/>
           <DataInspector data={authoredState} label="Authored State"/>
         </div>
+        <ActionButtons PluginAPI={PluginAPI} />
       </div>
     );
   }

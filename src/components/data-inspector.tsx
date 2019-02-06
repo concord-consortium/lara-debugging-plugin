@@ -21,7 +21,7 @@ export default class DataInspector extends React.Component<IProps, IState> {
     let value: string|JSX.Element;
     value =  JSON.stringify(data[key], null, 2);
     if (typeof data[key] === "object") {
-      value = <DataInspector data={data[key]} label={key} />;
+      value = <DataInspector key={key} data={data[key]} label={key} />;
     }
     return (<tr key={key}><td>{key}</td><td>{value}</td></tr>);
   }

@@ -55,7 +55,7 @@ export interface IClassInfo {
 // WARNING: Please refer to the latest LARA Api from the LARA project.
 // @see https://github.com/concord-consortium/lara/blob/master/app/assets/javascripts/lara-api.js
 
-interface IPopupOptions {
+export interface IPopupOptions {
   content: HTMLElement | string;
   autoOpen?: boolean;
   closeOnEscape?: boolean;
@@ -78,6 +78,7 @@ interface IPopupOptions {
   titlebarColor?: string;
   onOpen?: () => void;
   onClose?: () => void;
+  onRemove?: () => void;
   // Triggered when a dialog is about to close. If canceled (by returning false), the dialog will not close.
   onBeforeClose?: () => boolean;
   onResize?: () => void;
@@ -94,7 +95,7 @@ export interface IPopupController {
   remove: () => void;
 }
 
-interface ISidebarOptions {
+export interface ISidebarOptions {
   content: string | HTMLElement;
   // Icon can be 'default' (arrow) or an HTML element.
   icon?: string | HTMLElement;
@@ -110,7 +111,7 @@ interface ISidebarOptions {
   onClose?: () => void;
 }
 
-interface ISidebarController {
+export interface ISidebarController {
   open: () => void;
   close: () => void;
 }
