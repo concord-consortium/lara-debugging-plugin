@@ -77,6 +77,13 @@ module.exports = (env, argv) => {
       new CopyWebpackPlugin([
         {from: 'src/public'}
       ])
-    ]
+    ],
+    devServer: {
+      before: (app, server) => {
+        app.post('*', (req, res) => {
+            res.redirect(req.originalUrl);
+        });
+      }
+    }
   };
 };
