@@ -5,7 +5,7 @@ context("Test the demo app", () => {
 
   describe("Demo page", () => {
     it("renders a plugin component", () => {
-      cy.get("#plugin").should((d) => expect(d).to.contain("Hello World"));
+      cy.get("#plugin").should((d) => expect(d).to.contain("LARA Context inspector"));
     });
   });
 });

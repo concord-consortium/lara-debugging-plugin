@@ -48,8 +48,12 @@ export default class PluginComponent extends React.Component<IProps, IState> {
   public render() {
     const {context, authoredState} = this.props;
     const {classInfo, claims, interactiveState} = this.state;
+    const headerStyle = {
+      fontFamily: "sans-serif"
+    };
     return (
       <div>
+        <span style={headerStyle}> LARA Context inspector </span>
         <div ref={this.wrappedEmbeddableDivContainer} />
         <div className={css.plugin}>
           <DataInspector data={context} hideKeys={["div"]} label="Context"/>
