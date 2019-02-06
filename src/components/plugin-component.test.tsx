@@ -2,15 +2,15 @@ import * as React from "react";
 import PluginComponent from "./plugin-component";
 import { shallow } from "enzyme";
 
-const testingText =  "Hello World!";
+const expectedText =  "LARA Context";
 
 const props = {
-  helloText: testingText
+  helloText: "Hello World!"
 };
 
 describe("WindowShade component", () => {
   it("renders Hello World", () => {
     const wrapper = shallow(<PluginComponent authoredState={props}/>);
-    expect(wrapper.text()).toEqual(testingText);
+    expect(wrapper.text()).toMatch(expectedText);
   });
 });

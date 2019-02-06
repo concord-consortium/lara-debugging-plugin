@@ -1,21 +1,31 @@
 import * as React from "react";
 import { IAuthoredState } from "../types";
 import { IExternalScriptContext } from "../lara/interfaces";
-import { getFirebaseJWT, getClassInfo } from "../lara/helper-functions";
+import {
+  getFirebaseJWT,
+  getClassInfo,
+  getInteractiveState,
+  IJwtResponse,
+  IJwtClaims,
+  IPortalClaims,
+  IClassInfo,
+  IInteractiveState
+} from "../lara/helper-functions";
 import * as css from "./plugin-component.sass";
 import DataInspector from "./data-inspector";
 
-interface IProps {
-  PluginAPI: any;
+export interface IProps {
+  PluginAPI?: any;
   authoredState: IAuthoredState;
   wrappedEmbeddableDiv?: HTMLDivElement;
   wrappedEmbeddableContext?: any;
-  context: IExternalScriptContext;
+  context?: IExternalScriptContext;
 }
 interface IState {
   token: string;
-  claims?: any;
-  classInfo?: any;
+  claims: IJwtClaims | {};
+  classInfo?: IClassInfo;
+  interactiveState?: IInteractiveState;
 }
 
 export default class PluginComponent extends React.Component<IProps, IState> {
@@ -29,24 +39,26 @@ export default class PluginComponent extends React.Component<IProps, IState> {
   public componentDidMount() {
     const {context, authoredState} = this.props;
     const {firebaseAppName } = authoredState;
-    getFirebaseJWT(context, firebaseAppName).then((response) => {
-      this.setState({token: response.token, claims: response.claims});
-    });
-    getClassInfo(context).then( (classInfo) => {
-      this.setState({classInfo});
-    });
     this.getRefToWRap();
+    if (context) {
+      this.initialize(context, firebaseAppName || "fake-firebase-app");
+    }
   }
 
   public render() {
     const {context, authoredState} = this.props;
-    const {classInfo, claims} = this.state;
+    const {classInfo, claims, interactiveState} = this.state;
+    const headerStyle = {
+      fontFamily: "sans-serif"
+    };
     return (
       <div>
+        <span style={headerStyle}> LARA Context inspector </span>
         <div ref={this.wrappedEmbeddableDivContainer} />
         <div className={css.plugin}>
-          <DataInspector data={context} hideKeys={['div']} label="Context"/>
+          <DataInspector data={context} hideKeys={["div"]} label="Context"/>
           <DataInspector data={classInfo} label="Class Info"/>
+          <DataInspector data={interactiveState} label="Interactive State"/>
           <DataInspector data={claims} label="JWT Claims"/>
           <DataInspector data={authoredState} label="Authored State"/>
         </div>
@@ -62,4 +74,18 @@ export default class PluginComponent extends React.Component<IProps, IState> {
     const containerNode = this.wrappedEmbeddableDivContainer.current!;
     containerNode.appendChild(wrappedEmbeddableDiv);
   }
+
+  private initialize(context: IExternalScriptContext, appName: string) {
+    Promise.all([
+      getFirebaseJWT(context, appName),
+      getClassInfo(context),
+      getInteractiveState(context)
+    ])
+    .then( ([jwtResponse, classInfo, interactiveState]) => {
+      this.setState({token: jwtResponse.token, claims: jwtResponse.claims});
+      this.setState({classInfo});
+      this.setState({interactiveState});
+    });
+  }
+
 }
