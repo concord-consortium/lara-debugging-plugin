@@ -52,7 +52,6 @@ export interface IClassInfo {
   offerings: IOffering[];
 }
 
-
 // WARNING: Please refer to the latest LARA Api from the LARA project.
 // @see https://github.com/concord-consortium/lara/blob/master/app/assets/javascripts/lara-api.js
 
