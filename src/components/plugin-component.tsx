@@ -77,14 +77,19 @@ export default class PluginComponent extends React.Component<IProps, IState> {
 
   private initialize(context: IExternalScriptContext, appName: string) {
     Promise.all([
-      getFirebaseJWT(context, appName),
-      getClassInfo(context),
-      getInteractiveState(context)
+      getFirebaseJWT(context, appName).catch( (e) => null),
+      getClassInfo(context).catch( (e) => null ) ,
+      getInteractiveState(context).catch( (e) => null)
     ])
     .then( ([jwtResponse, classInfo, interactiveState]) => {
-      this.setState({token: jwtResponse.token, claims: jwtResponse.claims});
-      this.setState({classInfo});
-      this.setState({interactiveState});
+      if (jwtResponse) {
+        this.setState({
+          token: jwtResponse.token,
+          claims: jwtResponse.claims
+        });
+      }
+      if (classInfo) { this.setState({classInfo}); }
+      if (interactiveState) { this.setState({interactiveState}); }
     });
   }
 

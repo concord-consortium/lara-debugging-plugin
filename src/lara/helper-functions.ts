@@ -46,7 +46,7 @@ export interface IInteractiveState {
   activity_name: string;
 }
 
-export const getFirebaseJWT = (context: IExternalScriptContext, appname: string): Promise<IJwtResponse> => {
+export const getFirebaseJWT = (context: IExternalScriptContext, appname: string): Promise<IJwtResponse|null> => {
   const {getFirebaseJwtUrl} = context;
   return new Promise( (resolve, reject) => {
     const appSpecificUrl = getFirebaseJwtUrl(appname);
@@ -66,7 +66,8 @@ export const getFirebaseJWT = (context: IExternalScriptContext, appname: string)
           console.error(error);
         }
         resolve({token: data, claims: {}});
-      });
+      })
+      .catch( (e) => resolve(null));
     });
   });
 };
