@@ -78,6 +78,11 @@ module.exports = (env, argv) => {
         {from: 'src/public'}
       ])
     ],
+    externals: {
+      'react': 'React',
+      'react-dom': 'ReactDOM',
+      '@concord-consortium/lara-plugin-api': 'LARA.PluginAPI_V3'
+    },
     devServer: {
       before: (app, server) => {
         app.post('*', (req, res) => {

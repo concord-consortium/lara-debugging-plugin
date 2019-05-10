@@ -1,12 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import PluginApp from "./components/plugin-app";
+import PluginComponent from "./components/plugin-component";
 import PluginConfig from "./config/plugin-config";
-import {IExternalScriptContext, ILara} from "./lara/interfaces";
+import * as PluginAPI from "@concord-consortium/lara-plugin-api";
 
-let PluginAPI: ILara;
-
-const getAuthoredState = (context: IExternalScriptContext) => {
+const getAuthoredState = (context: PluginAPI.IPluginRuntimeContext) => {
   if (!context.authoredState) {
     return {};
   }
@@ -22,31 +20,26 @@ const getAuthoredState = (context: IExternalScriptContext) => {
 };
 
 export class TeacherEditionTipsPlugin {
-  public context: IExternalScriptContext;
+  public context: PluginAPI.IPluginRuntimeContext;
   public pluginAppComponent: any;
 
-  constructor(context: IExternalScriptContext) {
+  constructor(context: PluginAPI.IPluginRuntimeContext) {
     this.context = context;
     this.renderPluginApp();
   }
 
   public renderPluginApp = () => {
-    PluginAPI = (window as any).LARA;
     const authoredState = getAuthoredState(this.context);
     this.pluginAppComponent = ReactDOM.render(
-      <PluginApp
+      <PluginComponent
         authoredState={authoredState}
-        wrappedEmbeddableDiv={this.context.wrappedEmbeddableDiv}
-        wrappedEmbeddableContext={this.context.wrappedEmbeddableContext}
         context={this.context}
-        PluginAPI={PluginAPI}
       />,
-      this.context.div);
+      this.context.container);
   }
 }
 
 export const initPlugin = () => {
-  PluginAPI = (window as any).LARA;
   const {PluginID, PluginName} = PluginConfig;
   if (!PluginAPI || !PluginAPI.registerPlugin) {
     // tslint:disable-next-line:no-console
