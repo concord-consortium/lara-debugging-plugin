@@ -2,7 +2,6 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import JsonEditor from "./json-editor";
 import {IAuthoredState} from "../../types";
-import PluginComponent from "../plugin-component";
 import * as css from "./authoring-app.sass";
 
 const defaultProps: IAuthoredState = {
@@ -28,9 +27,6 @@ export default class AuthoringApp extends React.Component<IProps, IState> {
     return (
       <div className={css.container}>
         <div className={css.preview}>
-          <PluginComponent
-            authoredState={authoredState}
-          />
         </div>
         <div className={css.json}>
           <JsonEditor authoredState={authoredState} onSave={this.updateState}/>

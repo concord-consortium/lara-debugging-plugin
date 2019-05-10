@@ -30,5 +30,4 @@ export default class ActionButtons extends React.Component<IProps, IState> {
   private addPopUp = () => {
     this.popupController = PluginAPI.addPopup({content: "Test popup content", title: "Test popup", closeButton: true});
   }
-
 }
