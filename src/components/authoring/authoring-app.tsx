@@ -53,5 +53,5 @@ export default class AuthoringApp extends React.Component<IProps, IState> {
   }
 }
 
-const targetDiv = document.getElementById("window-shade-editor");
+const targetDiv = document.getElementById("editor");
 ReactDOM.render(<AuthoringApp initialAuthoredState={defaultProps}/>, targetDiv);
