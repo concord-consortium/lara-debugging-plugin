@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as css from "./action-buttons.sass";
 import * as PluginAPI from "@concord-consortium/lara-plugin-api";
+// Mock LARA API.
+jest.mock("@concord-consortium/lara-plugin-api");
 
 interface IProps {}
 interface IState {}
