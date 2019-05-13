@@ -1,17 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-
-import * as css from "./authoring-app.sass";
 import JsonEditor from "./json-editor";
-
-import { IAuthoredState } from "../../types";
-import PluginComponent from "../plugin-component";
+import {IAuthoredState} from "../../types";
+import * as css from "./authoring-app.sass";
 
 const defaultProps: IAuthoredState = {
   firebaseAppName: "fake-db-name"
 };
-
-const portalDom = document.createElement("div");
 
 interface IProps {
   initialAuthoredState: IAuthoredState;
@@ -28,17 +23,11 @@ export default class AuthoringApp extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { authoredState } = this.state;
-    const { firebaseAppName } = authoredState;
+    const {authoredState} = this.state;
     return (
       <div className={css.container}>
-        <div className={css.preview}>
-          <PluginComponent
-            authoredState={authoredState}
-          />
-        </div>
         <div className={css.json}>
-          <JsonEditor authoredState={authoredState} onSave={this.updateState} />
+          <JsonEditor authoredState={authoredState} onSave={this.updateState}/>
         </div>
       </div>
     );
@@ -54,9 +43,9 @@ export default class AuthoringApp extends React.Component<IProps, IState> {
   }
 
   private setInitialState(): IAuthoredState {
-      return this.cloneState(this.props.initialAuthoredState);
+    return this.cloneState(this.props.initialAuthoredState);
   }
 }
 
-const targetDiv = document.getElementById("window-shade-editor");
+const targetDiv = document.getElementById("editor");
 ReactDOM.render(<AuthoringApp initialAuthoredState={defaultProps}/>, targetDiv);

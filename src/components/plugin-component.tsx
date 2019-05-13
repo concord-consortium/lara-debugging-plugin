@@ -1,32 +1,20 @@
 import * as React from "react";
-import { IAuthoredState } from "../types";
-import { IExternalScriptContext, ILara } from "../lara/interfaces";
-import {
-  getFirebaseJWT,
-  getClassInfo,
-  getInteractiveState,
-  IJwtResponse,
-  IJwtClaims,
-  IPortalClaims,
-  IClassInfo,
-  IInteractiveState
-} from "../lara/helper-functions";
+import {IAuthoredState} from "../types";
 import * as css from "./plugin-component.sass";
 import DataInspector from "./data-inspector";
 import ActionButtons from "./action-buttons";
+import * as PluginAPI from "@concord-consortium/lara-plugin-api";
 
 export interface IProps {
-  PluginAPI?: ILara;
   authoredState: IAuthoredState;
-  wrappedEmbeddableDiv?: HTMLDivElement;
-  wrappedEmbeddableContext?: any;
-  context?: IExternalScriptContext;
+  context?: PluginAPI.IPluginRuntimeContext;
 }
+
 interface IState {
   token: string;
-  claims: IJwtClaims | {};
-  classInfo?: IClassInfo;
-  interactiveState?: IInteractiveState;
+  claims: PluginAPI.IJwtClaims | {};
+  classInfo?: PluginAPI.IClassInfo;
+  interactiveState?: PluginAPI.IInteractiveState;
 }
 
 export default class PluginComponent extends React.Component<IProps, IState> {
@@ -39,7 +27,7 @@ export default class PluginComponent extends React.Component<IProps, IState> {
 
   public componentDidMount() {
     const {context, authoredState} = this.props;
-    const {firebaseAppName } = authoredState;
+    const {firebaseAppName} = authoredState;
     this.getRefToWRap();
     if (context) {
       this.initialize(context, firebaseAppName || "fake-firebase-app");
@@ -47,27 +35,28 @@ export default class PluginComponent extends React.Component<IProps, IState> {
   }
 
   public render() {
-    const {context, authoredState, PluginAPI } = this.props;
+    const {context, authoredState} = this.props;
     const {classInfo, claims, interactiveState} = this.state;
-    const headerStyle = {fontFamily: "sans-serif" };
+    const headerStyle = {fontFamily: "sans-serif"};
     return (
       <div>
         <span style={headerStyle}> LARA Context inspector </span>
-        <div ref={this.wrappedEmbeddableDivContainer} />
+        <div ref={this.wrappedEmbeddableDivContainer}/>
         <div className={css.plugin}>
-          <DataInspector data={context} hideKeys={["div"]} label="Context"/>
+          <DataInspector data={context} hideKeys={["container"]} label="Context"/>
           <DataInspector data={classInfo} label="Class Info"/>
           <DataInspector data={interactiveState} label="Interactive State"/>
           <DataInspector data={claims} label="JWT Claims"/>
           <DataInspector data={authoredState} label="Authored State"/>
         </div>
-        <ActionButtons PluginAPI={PluginAPI} />
+        <ActionButtons/>
       </div>
     );
   }
 
-  private getRefToWRap(){
-    const { wrappedEmbeddableDiv } = this.props;
+  private getRefToWRap() {
+    const {context} = this.props;
+    const wrappedEmbeddableDiv = context && context.wrappedEmbeddable && context.wrappedEmbeddable.container;
     if (!wrappedEmbeddableDiv) {
       return;
     }
@@ -75,22 +64,28 @@ export default class PluginComponent extends React.Component<IProps, IState> {
     containerNode.appendChild(wrappedEmbeddableDiv);
   }
 
-  private initialize(context: IExternalScriptContext, appName: string) {
-    Promise.all([
-      getFirebaseJWT(context, appName).catch( (e) => null),
-      getClassInfo(context).catch( (e) => null ) ,
-      getInteractiveState(context).catch( (e) => null)
-    ])
-    .then( ([jwtResponse, classInfo, interactiveState]) => {
+  private initialize(context: PluginAPI.IPluginRuntimeContext, appName: string) {
+    context.getFirebaseJwt(appName).then((jwtResponse: PluginAPI.IJwtResponse) => {
       if (jwtResponse) {
         this.setState({
           token: jwtResponse.token,
           claims: jwtResponse.claims
         });
       }
-      if (classInfo) { this.setState({classInfo}); }
-      if (interactiveState) { this.setState({interactiveState}); }
     });
-  }
 
+    const classInfoPromise = context.getClassInfo();
+    if (classInfoPromise) {
+      classInfoPromise.then(classInfo =>
+        this.setState({classInfo})
+      );
+    }
+
+    const interactiveStatePromise = context.wrappedEmbeddable && context.wrappedEmbeddable.getInteractiveState();
+    if (interactiveStatePromise) {
+      interactiveStatePromise.then(interactiveState => {
+        this.setState({interactiveState});
+      });
+    }
+  }
 }

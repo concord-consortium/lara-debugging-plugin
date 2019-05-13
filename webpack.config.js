@@ -5,12 +5,10 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = (env, argv) => {
   const devMode = argv.mode !== 'production';
-
   return {
     context: __dirname, // to automatically find tsconfig.json
     devtool: 'source-map',
     entry: {
-      demo: './src/demo.tsx',
       authoring: './src/components/authoring/authoring-app',
       plugin: './src/plugin.tsx',
     },
@@ -78,6 +76,11 @@ module.exports = (env, argv) => {
         {from: 'src/public'}
       ])
     ],
+    externals: {
+      'react': 'React',
+      'react-dom': 'ReactDOM',
+      '@concord-consortium/lara-plugin-api': 'LARA.PluginAPI_V3'
+    },
     devServer: {
       before: (app, server) => {
         app.post('*', (req, res) => {
