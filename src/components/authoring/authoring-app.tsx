@@ -26,8 +26,6 @@ export default class AuthoringApp extends React.Component<IProps, IState> {
     const {authoredState} = this.state;
     return (
       <div className={css.container}>
-        <div className={css.preview}>
-        </div>
         <div className={css.json}>
           <JsonEditor authoredState={authoredState} onSave={this.updateState}/>
         </div>
