@@ -19,7 +19,7 @@ const getAuthoredState = (context: PluginAPI.IPluginRuntimeContext) => {
   return authoredState;
 };
 
-export class TeacherEditionTipsPlugin {
+export class RuntimePlugin {
   public context: PluginAPI.IPluginRuntimeContext;
   public pluginAppComponent: any;
 
@@ -39,6 +39,9 @@ export class TeacherEditionTipsPlugin {
   }
 }
 
+export class AuthoringNotImplemented {
+}
+
 export const initPlugin = () => {
   const {PluginID, PluginName} = PluginConfig;
   if (!PluginAPI || !PluginAPI.registerPlugin) {
@@ -48,7 +51,10 @@ export const initPlugin = () => {
   }
   // tslint:disable-next-line:no-console
   console.log(`LARA Plugin API available, ${PluginName} initialization`);
-  PluginAPI.registerPlugin(PluginID, TeacherEditionTipsPlugin);
+  PluginAPI.registerPlugin({
+    runtimeClass: RuntimePlugin,
+    authoringClass: AuthoringNotImplemented
+  });
 };
 
 initPlugin();

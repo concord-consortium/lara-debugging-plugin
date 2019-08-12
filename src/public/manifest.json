@@ -1,0 +1,17 @@
+{
+  "name": "Lara Debug Plugin",
+  "label": "laraDebugPlugin",
+  "url": "plugin.js",
+  "version": 3,
+  "description": "This plugin provides debugging information",
+  "authoring_metadata": {
+    "components": [
+      {
+        "label": "laraDebugPlugin",
+        "name": "Debug",
+        "scope": "embeddable",
+        "guiAuthoring": false
+      }
+    ]
+  }
+}
