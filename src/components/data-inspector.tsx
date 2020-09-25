@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import * as css from "./data-inspector.sass";
 
 interface IProps {
@@ -44,5 +44,5 @@ export default class DataInspector extends React.Component<IProps, IState> {
     return <div className={css.inspector}/>;
   }
 
-  private toggleOpen = () => { this.setState({open: !this.state.open}); };
+  private toggleOpen = () => { this.setState(state => ({open: !state.open})); };
 }

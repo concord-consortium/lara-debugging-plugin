@@ -1,5 +1,5 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
+import ReactDOM from "react-dom";
 import JsonEditor from "./json-editor";
 import {IAuthoredState} from "../../types";
 import * as css from "./authoring-app.sass";
@@ -38,8 +38,8 @@ export default class AuthoringApp extends React.Component<IProps, IState> {
   }
 
   private cloneState(newState: IAuthoredState) {
-    const prevState = (this.state && this.state.authoredState) || this.props.initialAuthoredState;
-    return Object.assign({}, prevState, newState);
+    const prevState = this.state?.authoredState || this.props.initialAuthoredState;
+    return { ...prevState, ...newState };
   }
 
   private setInitialState(): IAuthoredState {

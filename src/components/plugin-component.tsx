@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import {IAuthoredState} from "../types";
 import * as css from "./plugin-component.sass";
 import DataInspector from "./data-inspector";
@@ -12,13 +12,14 @@ export interface IProps {
 
 interface IState {
   token: string;
-  claims: PluginAPI.IJwtClaims | {};
+  claims: PluginAPI.IJwtClaims | Record<string, unknown>;
   classInfo?: PluginAPI.IClassInfo;
   interactiveState?: PluginAPI.IInteractiveState;
 }
 
 export default class PluginComponent extends React.Component<IProps, IState> {
   public state: IState = {
+    // eslint-disable-next-line react/no-unused-state
     token: "",
     claims: {}
   };
@@ -56,18 +57,19 @@ export default class PluginComponent extends React.Component<IProps, IState> {
 
   private getRefToWRap() {
     const {context} = this.props;
-    const wrappedEmbeddableDiv = context && context.wrappedEmbeddable && context.wrappedEmbeddable.container;
+    const wrappedEmbeddableDiv = context?.wrappedEmbeddable && context.wrappedEmbeddable.container;
     if (!wrappedEmbeddableDiv) {
       return;
     }
-    const containerNode = this.wrappedEmbeddableDivContainer.current!;
-    containerNode.appendChild(wrappedEmbeddableDiv);
+    const containerNode = this.wrappedEmbeddableDivContainer.current;
+    containerNode?.appendChild(wrappedEmbeddableDiv);
   }
 
   private initialize(context: PluginAPI.IPluginRuntimeContext, appName: string) {
     context.getFirebaseJwt(appName).then((jwtResponse: PluginAPI.IJwtResponse) => {
       if (jwtResponse) {
         this.setState({
+          // eslint-disable-next-line react/no-unused-state
           token: jwtResponse.token,
           claims: jwtResponse.claims
         });
@@ -81,7 +83,7 @@ export default class PluginComponent extends React.Component<IProps, IState> {
       );
     }
 
-    const interactiveStatePromise = context.wrappedEmbeddable && context.wrappedEmbeddable.getInteractiveState();
+    const interactiveStatePromise = context.wrappedEmbeddable?.getInteractiveState();
     if (interactiveStatePromise) {
       interactiveStatePromise.then(interactiveState => {
         this.setState({interactiveState});

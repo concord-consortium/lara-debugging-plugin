@@ -1,19 +1,17 @@
 # LARA Debugging Plugin
 
 Add this plugin to a LARA instance to see what the plugin runtime context is being
-set as. Future plans are to excersize all lara API functions.
+set as. Future plans are to exercise all lara API functions.
 
 This project was cloned from the [Lara Starter Plugin repo](https://github.com/concord-consortium/lara-starter-plugin).
 
-A LARA Plugin API Interface has been provided in `./src/lara/interfaces.ts`
-it would be smart to check the
+A LARA Plugin API Interface has been provided in `./src/lara/interfaces.ts`. It would be smart to check the
 [current LARA API](https://github.com/concord-consortium/lara/blob/master/app/assets/javascripts/lara-api.js) in the
 [LARA repo](https://github.com/concord-consortium/lara)
 
 To install this plugin in LARA using a local server, login as an admin, and follow
 the top navigation link to 'Plugins' and then create a new one. Set the plugin's
 label to `LaraDebugPlugin` as defined in `plugin-config.tsx`.
-
 
 ## Development
 
@@ -36,16 +34,14 @@ You *do not* need to build to deploy the code, that is automatic.  See more info
 
 ## Deployment
 
-*TODO* Set up Travis Deployment
-
 Production releases to S3 are based on the contents of the /dist folder and are built automatically by Travis
 for each branch pushed to GitHub and each merge into production.
 
-Merges into production are deployed to http://lara-debug-plugin.concord.org.
+Merges into production are deployed to `https://lara-debug-plugin.concord.org`.
 
-Other branches are deployed to http://lara-debug-plugin.concord.org/branch/<name>.
+Other branches are deployed to `https://lara-debug-plugin.concord.org/branch/<branch-name>`.
 
-You can view the status of all the branch deploys [here](https://travis-ci.org/concord-consortium/lara-debug-plugin/branches).
+You can view the status of all the branch deploys [here](https://travis-ci.com/github/concord-consortium/lara-debugging-plugin/branches).
 
 To deploy a production release:
 

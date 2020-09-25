@@ -1,6 +1,5 @@
 'use strict';
 
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = (env, argv) => {
@@ -24,7 +23,7 @@ module.exports = (env, argv) => {
           enforce: 'pre',
           use: [
             {
-              loader: 'tslint-loader',
+              loader: 'eslint-loader',
               options: {}
             }
           ]
@@ -43,10 +42,11 @@ module.exports = (env, argv) => {
             {
               loader: 'css-loader',
               options: {
-                modules: true,
+                modules: {
+                  localIdentName: '[name]--[local]--TETipsPluginV1'
+                },
                 sourceMap: true,
-                importLoaders: 1,
-                localIdentName: '[name]--[local]--TETipsPluginV1'
+                importLoaders: 1
               }
             },
             'postcss-loader',
@@ -71,10 +71,11 @@ module.exports = (env, argv) => {
       warningsFilter: /export .* was not found in/
     },
     plugins: [
-      new ForkTsCheckerWebpackPlugin(),
-      new CopyWebpackPlugin([
-        {from: 'src/public'}
-      ])
+      new CopyWebpackPlugin({
+        patterns: [
+          {from: 'src/public'}
+        ]
+      })
     ],
     externals: {
       'react': 'React',

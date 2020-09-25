@@ -6,7 +6,7 @@ import {
 
 interface IProps {
   onSave?: (newState: IAuthoredState) => any;
-  validate?: (jsObject: object) => { valid: boolean; error: string; };
+  validate?: (jsObject: Record<string, unknown>) => { valid: boolean; error: string; };
   authoredState: IAuthoredState;
 }
 
@@ -50,11 +50,9 @@ export default class JsonEditor extends React.Component<IProps, IState> {
         this.props.onSave(newProps);
       }
       catch (error) {
-        // tslint:disable no-console
         console.error("unable to paste json");
         console.error(error);
         this.setState({workingState: this.getAuthoredJson()});
-        // tslint:enable no-console
       }
     }
   }
