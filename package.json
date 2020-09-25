@@ -34,7 +34,7 @@
     ]
   },
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --content-base dist/",
+    "start": "webpack-dev-server --port 8085 --inline --hot --content-base dist/",
     "build": "npm-run-all lint:build clean build:webpack",
     "build:webpack": "webpack --mode production --devtool false",
     "clean": "rimraf dist",
@@ -71,8 +71,8 @@
     "@babel/preset-env": "^7.11.5",
     "@cypress/webpack-preprocessor": "^5.4.5",
     "@svgr/webpack": "^5.4.0",
-    "@types/enzyme": "^3.10.7",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.0.4",
     "@types/jest": "^26.0.14",
     "@types/query-string": "^6.3.0",
     "@types/react": "^16.9.49",
@@ -86,8 +86,6 @@
     "copy-webpack-plugin": "^6.1.1",
     "css-loader": "^4.3.0",
     "cypress": "^5.2.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^7.9.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-eslint-comments": "^3.2.0",
@@ -117,7 +115,8 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@concord-consortium/lara-plugin-api": "^3.1.2",
+    "@concord-consortium/lara-interactive-api": "file:.yalc/@concord-consortium/lara-interactive-api",
+    "@concord-consortium/lara-plugin-api": "file:.yalc/@concord-consortium/lara-plugin-api",
     "query-string": "^6.13.2"
   }
 }
