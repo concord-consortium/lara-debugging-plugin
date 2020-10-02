@@ -25,7 +25,7 @@
           "ImageInteractive",
           "VideoInteractive"
         ],
-        "guiAuthoring": true,
+        "guiAuthoring": false,
         "guiPreview": true
       }
     ]
