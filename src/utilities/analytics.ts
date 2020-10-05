@@ -26,16 +26,13 @@ interface IAnalyticsService {
 
 // We create a service that looks like Google's `window.ga` interface
 // but merely logs to the console.
-// TSLint doesn't like console messages.
 const mockGa = {
-  // tslint:disable no-console
   ga: (send: "send", type: "event", data: IGAData) => {
     console.group("Mock analytics send payload:");
     console.debug(send);
     console.debug(JSON.stringify(data, null, 2));
     console.groupEnd();
   }
-  // tslint:enable no-console
 };
 
 export const logAnalyticsEvent = (event: ILogEvent) => {
@@ -55,10 +52,8 @@ export const logAnalyticsEvent = (event: ILogEvent) => {
       mockGa.ga("send", "event", payload);
     }
   } catch (e) {
-    // tslint:disable no-console
     console.error("Unable to send Google Analytics");
     console.error(e);
-    // tslint:enable no-console
   }
 
 };

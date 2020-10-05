@@ -11,6 +11,22 @@
         "name": "Debug",
         "scope": "embeddable",
         "guiAuthoring": false
+      },
+      {
+        "label": "debugQuestionWrapper",
+        "name": "Debug Question Wrapper",
+        "scope": "embeddable-decoration",
+        "decorates": [
+          "Embeddable::MultipleChoice",
+          "Embeddable::OpenResponse",
+          "Embeddable::ImageQuestion",
+          "ManagedInteractive",
+          "MwInteractive",
+          "ImageInteractive",
+          "VideoInteractive"
+        ],
+        "guiAuthoring": false,
+        "guiPreview": true
       }
     ]
   }

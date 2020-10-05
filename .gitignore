@@ -2,9 +2,12 @@ coverage
 dist
 node_modules
 npm-error.log
+yalc.lock
 
 # Private data
 .env
+.yalc
 
 # Editors
 .idea
+.vscode
